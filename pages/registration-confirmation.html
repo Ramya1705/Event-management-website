@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Confirmation - College Events</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Confirmation Hero Banner Styles */
+        .confirmation-hero {
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .confirmation-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .confirmation-hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Confirmation Container Styles */
+        .confirmation-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .confirmation-box {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .confirmation-icon {
+            font-size: 72px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .confirmation-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .confirmation-message {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn-primary {
+            padding: 12px 30px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .btn-secondary {
+            padding: 12px 30px;
+            background-color: var(--white);
+            color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light-blue);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .confirmation-hero h1 {
+                font-size: 36px;
+            }
+
+            .confirmation-box {
+                padding: 30px 20px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (same as signup page) -->
+    <nav>
+        <div class="logo">
+            <a href="../index.html">CollegeEvents</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="login-btn">Login</a></li>
+        </ul>
+        <div class="burger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Confirmation Hero Banner -->
+    <section class="confirmation-hero">
+        <div class="confirmation-hero-content">
+            <h1>Registration Complete!</h1>
+        </div>
+    </section>
+
+    <!-- Confirmation Container -->
+    <section class="confirmation-container">
+        <div class="confirmation-box">
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="confirmation-title">Thank You for Registering</h2>
+            <p class="confirmation-message">
+                Your account has been successfully created. A verification email has been sent to your registered email address. 
+                Please verify your email to complete the registration process and access all features of CollegeEvents.
+            </p>
+            <div class="action-buttons">
+                <a href="../index.html" class="btn-primary">Go to Homepage</a>
+                <a href="events.html" class="btn-secondary">Browse Events</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as signup page) -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CollegeEvents</h3>
+                <p>Your one-stop platform for all college events and activities.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <li><i class="fas fa-map-marker-alt"></i> SRKR Engineering College, Chinnamiram, Bhimavaram, Chinamiram Rural, Andhra Pradesh 534204, India</li>
+                <p><i class="fas fa-phone"></i>6301726462</p>
+                <p><i class="fas fa-envelope"></i> srkrec@collegeevents.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CollegeEvents. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle (same as signup page)
+            const burger = document.querySelector('.burger');
+            const navLinks = document.querySelector('.nav-links');
+            
+            burger.addEventListener('click', function() {
+                navLinks.classList.toggle('nav-active');
+            });
+        });
+    </script>
+</body>
+</html>

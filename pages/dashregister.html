@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register for Event - College Events</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #e31c3d;
+            --text: #333;
+            --text-light: #777;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+       
+        
+        .logo a {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+       
+
+        /* Hero Section with Particles Background */
+        .registration-hero {
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-400px) translateX(100px); opacity: 0; }
+        }
+
+        .registration-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .registration-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .registration-hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        /* Main Content - Swank Style */
+        .registration-container {
+            max-width: 1200px;
+            margin: -100px auto 80px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Form Styles - Swank Style */
+        .registration-form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            padding: 50px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .form-header h2 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+        
+        .form-header p {
+            color: var(--text-light);
+            font-size: 16px;
+        }
+        
+        .form-section {
+            margin-bottom: 40px;
+        }
+        
+        .form-section h3 {
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--secondary);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group.required label:after {
+            content: " *";
+            color: var(--accent);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+            font-size: 15px;
+            background-color: rgba(255,255,255,0.8);
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(227,28,61,0.1);
+            background-color: white;
+        }
+        
+        .payment-options {
+            margin: 40px 0;
+        }
+        
+        .payment-options h3 {
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .payment-options p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin: 30px 0;
+        }
+        
+        .terms-checkbox input {
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+        
+        .terms-checkbox label {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .terms-checkbox a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+        
+        .submit-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            width: 100%;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #c61632;
+            transform: translateY(-2px);
+        }
+        
+        /* Sidebar - Swank Style */
+        .event-info-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .event-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .event-card h3 {
+            color: var(--primary);
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+        
+        .event-meta {
+            margin-bottom: 25px;
+        }
+        
+        .event-meta p {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+        }
+        
+        .event-meta i {
+            margin-right: 12px;
+            color: var(--accent);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .event-highlights {
+            margin-top: 30px;
+        }
+        
+        .event-highlights h3 {
+            color: var(--primary);
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .event-highlights ul {
+            list-style: none;
+        }
+        
+        .event-highlights li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .event-highlights li::before {
+            content: '\f054';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            top: 3px;
+            font-size: 12px;
+        }
+        
+        .help-card {
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            border-radius: 8px;
+            padding: 40px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .help-card h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+        
+        .help-card p {
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .help-card a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .help-card a:hover {
+            color: var(--accent);
+        }
+        
+    
+        
+        @media (max-width: 480px) {
+            .registration-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .registration-hero {
+                height: 50vh;
+                min-height: 400px;
+            }
+        }
+        
+        /* Event-specific styles */
+        .event-image-preview {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .event-selection {
+            margin-bottom: 30px;
+        }
+        
+        .event-selection select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+        }
+    </style>
+    <link rel="stylesheet" href="../assets/css/events.css">
+</head>
+<body>
+    
+
+    <!-- Hero Section with Background Image and Particles -->
+    <section class="registration-hero">
+        <div class="particles" id="particles-js"></div>
+        <div class="registration-hero-content">
+            <h1>Event Registration</h1>
+            <p>Register for upcoming college events with a single form</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="registration-container">
+        <!-- Registration Form -->
+        <div class="registration-form-container">
+            <div class="form-header">
+                <h2>Event Registration</h2>
+                <p>Please complete all required fields to secure your spot</p>
+            </div>
+            
+            <form id="event-registration-form">
+                <!-- Event Selection -->
+                <div class="form-section">
+                    <h3>Event Information</h3>
+                    <div class="event-selection">
+                        <div class="form-group required">
+                            <label for="event-select">Select Event</label>
+                            <select id="event-select" name="event" required>
+                                <option value="">-- Select an Event --</option>
+                                <option value="annual-day">Annual Day 2025</option>
+                                <option value="e-go-kart">E_GO KART Workshop</option>
+                                <option value="vajra">VAJRA - Communication Event</option>
+                                <option value="sports">Sports Fest - EL CLASICO 2025</option>
+                                <option value="ml-explore">ML XPLORE Workshop</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="event-preview">
+                        <img id="event-image" src="" alt="Selected Event" class="event-image-preview" style="display: none;">
+                        <div id="event-description" class="event-description"></div>
+                    </div>
+                </div>
+                
+                <!-- Personal Information -->
+                <div class="form-section">
+                    <h3>Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group required">
+                            <label for="first-name">First Name</label>
+                            <input type="text" id="first-name" name="first-name" required>
+                        </div>
+                        <div class="form-group required">
+                            <label for="last-name">Last Name</label>
+                            <input type="text" id="last-name" name="last-name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group required">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group required">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group required">
+                            <label for="college-id">College ID Number</label>
+                            <input type="text" id="college-id" name="college-id" required>
+                        </div>
+                        <div class="form-group required">
+                            <label for="department">Department</label>
+                            <select id="department" name="department" required>
+                                <option value="">Select Department</option>
+                                <option value="CSE">Computer Science</option>
+                                <option value="ECE">Electronics</option>
+                                <option value="EEE">Electrical</option>
+                                <option value="MECH">Mechanical</option>
+                                <option value="CIVIL">Civil</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group required">
+                            <label for="year">Year of Study</label>
+                            <select id="year" name="year" required>
+                                <option value="">Select Year</option>
+                                <option value="1">1st Year</option>
+                                <option value="2">2nd Year</option>
+                                <option value="3">3rd Year</option>
+                                <option value="4">4th Year</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="section">Section (if applicable)</label>
+                            <input type="text" id="section" name="section">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Event-Specific Questions -->
+                <div class="form-section" id="event-specific-questions">
+                    <!-- Dynamic content will be inserted here based on event selection -->
+                </div>
+                
+                <!-- Payment Options -->
+                <div class="payment-options" id="payment-info">
+                    <h3>Payment Information</h3>
+                    <p>Select an event to see payment details.</p>
+                </div>
+                
+                <!-- Terms and Conditions -->
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">
+                        I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>. 
+                        I understand that photos may be taken at the event and used for promotional purposes.
+                    </label>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Complete Registration</button>
+            </form>
+        </div>
+        
+        <!-- Event Info Sidebar -->
+        <div class="event-info-sidebar">
+            <div class="event-card">
+                <h3>Event Details</h3>
+                <div class="event-meta" id="sidebar-event-meta">
+                    <p><i class="fas fa-info-circle"></i> Select an event to view details</p>
+                </div>
+                
+                <div class="event-highlights" id="sidebar-event-highlights">
+                    <h3>Event Highlights</h3>
+                    <p>Choose an event from the dropdown to see what's special about it.</p>
+                </div>
+            </div>
+            
+            <div class="help-card">
+                <h3>Need Help?</h3>
+                <p>If you have any questions about registration or the event, our team is happy to help.</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:events@srkrec.edu">events@srkrec.edu</a></p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+916301726462">+91 6301726462</a></p>
+                <p>Office hours: Mon-Fri, 9AM-5PM</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+
+
+    <script>
+        // Event data
+        const events = {
+            'annual-day': {
+                name: 'Annual Day 2025',
+                image: '../images/meet and greet.jpg',
+                date: 'March 15, 2025',
+                time: '6:00 AM - 11:00 PM',
+                location: 'Open Ground, SRKR Engineering College',
+                description: 'Our Annual Day turned extra special with the electrifying presence of Hero Nithiin and Heroine Sreeleela, who visited our campus to promote their upcoming movie *Robinhood*. The crowd went wild with excitement as the stars interacted with students, shared behind-the-scenes stories, and lit up the stage with their charm!',
+                highlights: [
+                    'Special appearance by Hero Nithiin & Heroine Sreeleela',
+                    'Robinhood movie promotion',
+                    'Cultural performances',
+                    'Award ceremonies',
+                    'Live entertainment'
+                ],
+                payment: 'This event is free for all registered students. No payment required.',
+                questions: `
+                    <div class="form-group">
+                        <label for="guests">Number of Guests (max 2)</label>
+                        <input type="number" id="guests" name="guests" min="0" max="2" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dietary">Dietary Requirements</label>
+                        <select id="dietary" name="dietary">
+                            <option value="none">No special requirements</option>
+                            <option value="vegetarian">Vegetarian</option>
+                            <option value="vegan">Vegan</option>
+                            <option value="gluten-free">Gluten Free</option>
+                            <option value="other">Other (please specify)</option>
+                        </select>
+                    </div>
+                `
+            },
+            'e-go-kart': {
+                name: 'E_GO KART Workshop',
+                image: '../images/sankalp.jpg',
+                date: 'February 14, 2025',
+                time: '9:00 AM - 4:00 PM',
+                location: 'Main Auditorium, Dept of ECE',
+                description: 'Join us for an exciting hands-on workshop where you\'ll learn the fundamentals of building and programming an electric go-kart. Perfect for engineering students interested in automotive technology and sustainable transportation.',
+                highlights: [
+                    'Hands-on building experience',
+                    'Learn about electric vehicle technology',
+                    'Team-based project',
+                    'Guidance from industry experts',
+                    'Certificate of participation'
+                ],
+                payment: 'Workshop fee: ₹500 per participant. Payment can be made at the venue.',
+                questions: `
+                    <div class="form-group required">
+                        <label for="experience-level">Experience Level</label>
+                        <select id="experience-level" name="experience-level" required>
+                            <option value="">Select your experience level</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="team-members">Team Members (if registering as a team)</label>
+                        <textarea id="team-members" name="team-members" rows="3" placeholder="Enter names and college IDs of team members"></textarea>
+                    </div>
+                `
+            },
+            'vajra': {
+                name: 'VAJRA - Communication Event',
+                image: '../images/vajra.jpg',
+                date: 'February 15, 2025',
+                time: '10:00 AM - 3:00 PM',
+                location: 'U Block',
+                description: 'VAJRA is a communication and non-technical event that tests your creativity, wit, and teamwork. Participate in various competitions and win exciting prizes!',
+                highlights: [
+                    'Art Show and Snap Wars competitions',
+                    'Treasure Hunt: Borderland with mystery rewards',
+                    'Fun Arena with five thrilling games',
+                    'Prizes for winners',
+                    'Great networking opportunity'
+                ],
+                payment: 'Registration fee: ₹100 per participant. Pay at the event desk.',
+                questions: `
+                    <div class="form-group required">
+                        <label for="event-category">Choose Event Category</label>
+                        <select id="event-category" name="event-category" required>
+                            <option value="">Select category</option>
+                            <option value="art-show">Art Show</option>
+                            <option value="snap-wars">Snap Wars</option>
+                            <option value="treasure-hunt">Treasure Hunt</option>
+                            <option value="fun-arena">Fun Arena</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="team-name">Team Name (if applicable)</label>
+                        <input type="text" id="team-name" name="team-name">
+                    </div>
+                `
+            },
+            'sports': {
+                name: 'Sports Fest - EL CLASICO 2025',
+                image: '../images/games.jpg',
+                date: 'January 30 - February 2, 2025',
+                time: '9:00 AM - 4:00 PM Daily',
+                location: 'Sports Complex',
+                description: 'EL CLASICO 2025 - Let the Games Begin! Gear up for an action-packed sports fest with exciting games like Cricket, Volleyball, Basketball, Throwball, Badminton, Table Tennis, Chess, and Carroms!',
+                highlights: [
+                    'Multiple sports competitions',
+                    'Team and individual events',
+                    'Trophies and medals for winners',
+                    'Refreshments provided',
+                    'Fun activities for all skill levels'
+                ],
+                payment: 'Registration fee varies by sport (₹50-200). Pay at the sports complex office.',
+                questions: `
+                    <div class="form-group required">
+                        <label for="sport">Select Sport</label>
+                        <select id="sport" name="sport" required>
+                            <option value="">Choose a sport</option>
+                            <option value="cricket">Cricket</option>
+                            <option value="volleyball">Volleyball</option>
+                            <option value="basketball">Basketball</option>
+                            <option value="throwball">Throwball</option>
+                            <option value="badminton">Badminton</option>
+                            <option value="table-tennis">Table Tennis</option>
+                            <option value="chess">Chess</option>
+                            <option value="carroms">Carroms</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="team-members-sports">Team Members (for team sports)</label>
+                        <textarea id="team-members-sports" name="team-members-sports" rows="3" placeholder="Enter names and college IDs of team members"></textarea>
+                    </div>
+                `
+            },
+            'ml-explore': {
+                name: 'ML XPLORE Workshop',
+                image: '../images/Ml explore.jpg',
+                date: 'January 8-9, 2025',
+                time: '9:00 AM - 4:30 PM',
+                location: 'CSE Auditorium',
+                description: 'ML Xplore: Beginner\'s Workshop for 2nd Years! Are you a second-year student eager to explore the exciting world of Machine Learning? This workshop is designed specifically for you—whether you\'re a complete beginner or just looking to sharpen your skills.',
+                highlights: [
+                    'Introduction to Machine Learning concepts',
+                    'Hands-on Python coding exercises',
+                    'Real-world project demonstration',
+                    'Q&A with ML experts',
+                    'Certificate of participation'
+                ],
+                payment: 'Workshop fee: ₹300. Payment can be made online or at the venue.',
+                questions: `
+                    <div class="form-group">
+                        <label for="laptop">Will you bring your laptop?</label>
+                        <select id="laptop" name="laptop">
+                            <option value="yes">Yes, I will bring my laptop</option>
+                            <option value="no">No, I need assistance</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="python-experience">Python Experience Level</label>
+                        <select id="python-experience" name="python-experience">
+                            <option value="none">No experience</option>
+                            <option value="basic">Basic knowledge</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                `
+            }
+        };
+
+        // Create particles for background effect
+        function createParticles() {
+            const particles = document.querySelector('.particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                
+                // Random size
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random opacity
+                particle.style.opacity = Math.random() * 0.5 + 0.3;
+                
+                // Random animation delay
+                const delay = Math.random() * 15;
+                particle.style.animationDelay = `${delay}s`;
+                
+                // Random animation duration
+                const duration = Math.random() * 10 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particles.appendChild(particle);
+            }
+        }
+        
+        // Update event details when selection changes
+        function updateEventDetails() {
+            const eventSelect = document.getElementById('event-select');
+            const selectedEvent = eventSelect.value;
+            
+            if (selectedEvent && events[selectedEvent]) {
+                const event = events[selectedEvent];
+                
+                // Update hero section
+                document.querySelector('.registration-hero-content h1').textContent = `Register for ${event.name}`;
+                
+                // Update form preview
+                const eventImage = document.getElementById('event-image');
+                eventImage.src = event.image;
+                eventImage.style.display = 'block';
+                
+                document.getElementById('event-description').innerHTML = `
+                    <h3>${event.name}</h3>
+                    <p>${event.description}</p>
+                `;
+                
+                // Update event-specific questions
+                document.getElementById('event-specific-questions').innerHTML = `
+                    <h3>${event.name} Details</h3>
+                    ${event.questions}
+                `;
+                
+                // Update payment info
+                document.getElementById('payment-info').innerHTML = `
+                    <h3>Payment Information</h3>
+                    <p>${event.payment}</p>
+                `;
+                
+                // Update sidebar
+                document.getElementById('sidebar-event-meta').innerHTML = `
+                    <p><i class="fas fa-calendar-alt"></i> ${event.date}</p>
+                    <p><i class="fas fa-clock"></i> ${event.time}</p>
+                    <p><i class="fas fa-map-marker-alt"></i> ${event.location}</p>
+                `;
+                
+                let highlightsHTML = '<h3>Event Highlights</h3><ul>';
+                event.highlights.forEach(highlight => {
+                    highlightsHTML += `<li>${highlight}</li>`;
+                });
+                highlightsHTML += '</ul>';
+                document.getElementById('sidebar-event-highlights').innerHTML = highlightsHTML;
+            } else {
+                // Reset if no event selected
+                document.querySelector('.registration-hero-content h1').textContent = 'Event Registration';
+                document.getElementById('event-image').style.display = 'none';
+                document.getElementById('event-description').innerHTML = '';
+                document.getElementById('event-specific-questions').innerHTML = '';
+                document.getElementById('payment-info').innerHTML = `
+                    <h3>Payment Information</h3>
+                    <p>Select an event to see payment details.</p>
+                `;
+                document.getElementById('sidebar-event-meta').innerHTML = `
+                    <p><i class="fas fa-info-circle"></i> Select an event to view details</p>
+                `;
+                document.getElementById('sidebar-event-highlights').innerHTML = `
+                    <h3>Event Highlights</h3>
+                    <p>Choose an event from the dropdown to see what's special about it.</p>
+                `;
+            }
+        }
+        
+        // Call the function when the page loads
+        window.addEventListener('load', function() {
+            createParticles();
+            
+            // Set up event listener for event selection
+            document.getElementById('event-select').addEventListener('change', updateEventDetails);
+            
+            // Burger menu toggle
+            document.querySelector('.burger').addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.toggle('active');
+            });
+        });
+        
+        document.getElementById('event-registration-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Form validation
+            const eventSelect = document.getElementById('event-select').value;
+            const firstName = document.getElementById('first-name').value;
+            const email = document.getElementById('email').value;
+            
+            if (!eventSelect || !firstName || !email) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // In a real implementation, this would send data to server
+            // For demo, redirect to confirmation page with event info
+            const eventName = events[eventSelect] ? events[eventSelect].name : 'Selected Event';
+            window.location.href = `registration-confirmation.html?event=${encodeURIComponent(eventName)}`;
+        });
+    </script>
+</body>
+</html>

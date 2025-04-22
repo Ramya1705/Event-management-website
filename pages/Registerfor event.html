@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration - College Events</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Registration Hero */
+        .registration-hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1540575467063-178a50c2df87');
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+            margin-bottom: 40px;
+        }
+        
+        /* Registration Container */
+        .registration-container {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+        
+        /* Event Info Card */
+        .event-info-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .event-info-card h3 {
+            color: #4a6fa5;
+            margin-bottom: 10px;
+        }
+        
+        .event-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        
+        /* Registration Form */
+        .registration-form {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #4a6fa5;
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: #3a5a8a;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .event-meta {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (Same as your events page) -->
+    <nav>
+        <div class="logo">
+            <a href="../index.html">CollegeEvents</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="login-btn">Login</a></li>
+        </ul>
+        <div class="burger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Registration Hero -->
+    <section class="registration-hero">
+        <div class="hero-content">
+            <h1>Event Registration</h1>
+            <p>Secure your spot for this exciting event</p>
+        </div>
+    </section>
+
+    <!-- Registration Container -->
+    <div class="registration-container">
+        <!-- Dynamic Event Info (Will be filled by JavaScript) -->
+        <div class="event-info-card" id="eventInfoCard">
+            <h3 id="eventTitle">Event Title</h3>
+            <div class="event-meta">
+                <span id="eventDate"><i class="fas fa-calendar-alt"></i> Loading...</span>
+                <span id="eventLocation"><i class="fas fa-map-marker-alt"></i> Loading...</span>
+            </div>
+            <p id="eventDescription">Event description will appear here</p>
+        </div>
+        
+        <!-- Registration Form -->
+        <div class="registration-form">
+            <h3>Registration Form</h3>
+            <form id="registrationForm">
+                <input type="hidden" id="eventId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="collegeId">College ID</label>
+                        <input type="text" id="collegeId" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" class="form-control" required>
+                            <option value="">Select Department</option>
+                            <option value="CSE">Computer Science</option>
+                            <option value="ECE">Electronics</option>
+                            <option value="EEE">Electrical</option>
+                            <option value="ME">Mechanical</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year of Study</label>
+                        <select id="year" class="form-control" required>
+                            <option value="">Select Year</option>
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="additionalInfo">Additional Requirements</label>
+                    <textarea id="additionalInfo" class="form-control" rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Complete Registration</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer (Same as your events page) -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CollegeEvents</h3>
+                <p>Your one-stop platform for all college events and activities.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> SRKR Engineering College, Bhimavaram, AP</li>
+                    <li><i class="fas fa-phone"></i> +91 6301726462</li>
+                    <li><i class="fas fa-envelope"></i> events@srkrec.edu</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CollegeEvents. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get event ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = urlParams.get('eventId');
+        
+        // In a real app, you would fetch event details from a database
+        // Here's a mock implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            const eventData = getEventData(eventId);
+            
+            if (eventData) {
+                document.getElementById('eventTitle').textContent = eventData.title;
+                document.getElementById('eventDate').innerHTML = `<i class="fas fa-calendar-alt"></i> ${eventData.date}`;
+                document.getElementById('eventLocation').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${eventData.location}`;
+                document.getElementById('eventDescription').textContent = eventData.description;
+                document.getElementById('eventId').value = eventId;
+                
+                // Update hero title
+                document.querySelector('.registration-hero h1').textContent = `Register for ${eventData.title}`;
+            }
+            
+            // Form submission
+            document.getElementById('registrationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Form validation
+                if (validateForm()) {
+                    // In a real app, submit to server
+                    alert('Registration successful!');
+                    window.location.href = 'registration-confirmation.html?eventId=' + eventId;
+                }
+            });
+        });
+        
+        function getEventData(eventId) {
+            // Mock data - in a real app, fetch from API
+            const events = {
+                'annual-day': {
+                    title: 'Annual Day 2025',
+                    date: 'March 15, 2025',
+                    location: 'Open Ground',
+                    description: 'Celebrating our college\'s achievements with special guest appearances.'
+                },
+                'ego-kart': {
+                    title: 'E_GO KART Workshop',
+                    date: 'Feb 14, 2025',
+                    location: 'Main Auditorium, ECE Dept',
+                    description: 'Learn the fundamentals of electric vehicle design.'
+                },
+                'ml-workshop': {
+                    title: 'ML XPLORE Workshop',
+                    date: 'Jan 8-9, 2025',
+                    location: 'CSE Auditorium',
+                    description: 'Two-day intensive workshop on machine learning fundamentals.'
+                }
+            };
+            
+            return events[eventId] || {
+                title: 'Selected Event',
+                date: 'Date not specified',
+                location: 'Location not specified',
+                description: 'Event details will be shown here'
+            };
+        }
+        
+        function validateForm() {
+            // Add your validation logic here
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1390 @@
+
+                                    <!DOCTYPE html>
+                                    <html lang="en">
+                                    <head>
+                                        <meta charset="UTF-8">
+                                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                        <title>My Dashboard - College Events</title>
+                                        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+                                        <style>
+                                           
+                                            * {
+                                                margin: 0;
+                                                padding: 0;
+                                                box-sizing: border-box;
+                                                font-family: 'Montserrat', sans-serif;
+                                            }
+                                            
+                                            body {
+                                                background-color: var(--light-gray);
+                                                color: var(--text-dark);
+                                                line-height: 1.6;
+                                            }
+                                            
+                                            /* Navigation Styles */
+                                            nav {
+                                                background-color: var(--white);
+                                                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                                                padding: 15px 5%;
+                                                display: flex;
+                                                justify-content: space-between;
+                                                align-items: center;
+                                                position: fixed;
+                                                width: 100%;
+                                                top: 0;
+                                                z-index: 1000;
+                                            }
+                                            
+                                            .logo {
+                                                font-size: 1.5rem;
+                                                font-weight: 700;
+                                                color: var(--primary-blue);
+                                                text-decoration: none;
+                                            }
+                                            
+                                            .nav-links {
+                                                display: flex;
+                                                list-style: none;
+                                            }
+                                            
+                                            .nav-links li {
+                                                margin-left: 30px;
+                                            }
+                                            
+                                            .nav-links a {
+                                                color: var(--text-dark);
+                                                text-decoration: none;
+                                                font-weight: 500;
+                                                transition: color 0.3s;
+                                            }
+                                            
+                                            .nav-links a:hover, 
+                                            .nav-links a.active {
+                                                color: var(--primary-blue);
+                                            }
+                                            
+                                            .user-menu {
+                                                display: flex;
+                                                align-items: center;
+                                                cursor: pointer;
+                                                position: relative;
+                                            }
+                                            
+                                            .user-name {
+                                                margin-right: 10px;
+                                                font-weight: 500;
+                                            }
+                                            
+                                            .fa-user-circle {
+                                                font-size: 1.5rem;
+                                                color: var(--primary-blue);
+                                            }
+                                            
+                                            .user-dropdown {
+                                                position: absolute;
+                                                top: 100%;
+                                                right: 0;
+                                                background: var(--white);
+                                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                                                border-radius: 5px;
+                                                width: 200px;
+                                                padding: 10px 0;
+                                                display: none;
+                                                z-index: 1000;
+                                            }
+                                            
+                                            .user-dropdown a {
+                                                display: block;
+                                                padding: 10px 20px;
+                                                color: var(--text-dark);
+                                                text-decoration: none;
+                                                transition: all 0.3s;
+                                            }
+                                            
+                                            .user-dropdown a:hover {
+                                                background: var(--light-blue);
+                                                color: var(--primary-blue);
+                                            }
+                                            
+                                            .burger {
+                                                display: none;
+                                                cursor: pointer;
+                                                font-size: 1.5rem;
+                                            }
+                                            
+                                            /* Dashboard Hero */
+                                            .dashboard-hero {
+                                                position: relative;
+                                                background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+                                                background-size: cover;
+                                                background-position: center;
+                                                height: 300px;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                color: white;
+                                                text-align: center;
+                                                overflow: hidden;
+                                                margin-top: 70px;
+                                            }
+                                            
+                                            .dashboard-hero h1 {
+                                                font-size: 2.5rem;
+                                                font-weight: 700;
+                                                margin-bottom: 20px;
+                                                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+                                            }
+                                            
+                                            .dashboard-hero p {
+                                                font-size: 1.2rem;
+                                                max-width: 700px;
+                                                margin: 0 auto;
+                                            }
+                                            
+                                            /* Dashboard Container */
+                                            .dashboard-container {
+                                                max-width: 1200px;
+                                                margin: 60px auto;
+                                                padding: 0 20px;
+                                            }
+                                            
+                                            /* User Profile Section */
+                                            .user-profile {
+                                                display: flex;
+                                                align-items: center;
+                                                margin-bottom: 40px;
+                                                background: var(--white);
+                                                padding: 30px;
+                                                border-radius: 8px;
+                                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                                            }
+                                            
+                                            .user-avatar {
+                                                width: 100px;
+                                                height: 100px;
+                                                border-radius: 50%;
+                                                background-color: var(--primary-blue);
+                                                color: var(--white);
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                font-size: 2.5rem;
+                                                font-weight: bold;
+                                                margin-right: 30px;
+                                                flex-shrink: 0;
+                                            }
+                                            
+                                            .user-info h2 {
+                                                margin-bottom: 10px;
+                                                color: var(--text-dark);
+                                            }
+                                            
+                                            .user-info p {
+                                                color: var(--text-light);
+                                                margin-bottom: 5px;
+                                                display: flex;
+                                                align-items: center;
+                                            }
+                                            
+                                            .user-info i {
+                                                margin-right: 8px;
+                                                color: var(--primary-blue);
+                                            }
+                                            
+                                            /* Stats Grid */
+                                            .stats-grid {
+                                                display: grid;
+                                                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                                                gap: 20px;
+                                                margin-bottom: 40px;
+                                            }
+                                            
+                                            .stat-card {
+                                                background: var(--white);
+                                                border-radius: 8px;
+                                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                                                padding: 30px;
+                                                text-align: center;
+                                                transition: transform 0.3s;
+                                            }
+                                            
+                                            .stat-card:hover {
+                                                transform: translateY(-5px);
+                                                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                                            }
+                                            
+                                            .stat-card i {
+                                                font-size: 2rem;
+                                                color: var(--primary-blue);
+                                                margin-bottom: 15px;
+                                            }
+                                            
+                                            .stat-number {
+                                                font-size: 2.5rem;
+                                                font-weight: 700;
+                                                color: var(--primary-blue);
+                                                margin: 10px 0;
+                                            }
+                                            
+                                            .stat-label {
+                                                color: var(--text-light);
+                                                font-size: 1rem;
+                                            }
+                                            
+                                            /* Dashboard Tabs */
+                                            .dashboard-tabs {
+                                                display: flex;
+                                                border-bottom: 1px solid var(--border-color);
+                                                margin-bottom: 30px;
+                                                overflow-x: auto;
+                                                scrollbar-width: none; /* Firefox */
+                                            }
+                                            
+                                            .dashboard-tabs::-webkit-scrollbar {
+                                                display: none; /* Chrome/Safari */
+                                            }
+                                            
+                                            .tab {
+                                                padding: 15px 30px;
+                                                cursor: pointer;
+                                                font-weight: 600;
+                                                color: var(--text-light);
+                                                position: relative;
+                                                transition: all 0.3s ease;
+                                                white-space: nowrap;
+                                            }
+                                            
+                                            .tab.active {
+                                                color: var(--primary-blue);
+                                            }
+                                            
+                                            .tab.active::after {
+                                                content: '';
+                                                position: absolute;
+                                                bottom: -1px;
+                                                left: 0;
+                                                width: 100%;
+                                                height: 2px;
+                                                background-color: var(--primary-blue);
+                                            }
+                                            
+                                            /* Dashboard Cards */
+                                            .dashboard-card {
+                                                background: var(--white);
+                                                border-radius: 8px;
+                                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                                                padding: 30px;
+                                                margin-bottom: 30px;
+                                            }
+                                            
+                                            .dashboard-card h3 {
+                                                margin-bottom: 20px;
+                                                color: var(--text-dark);
+                                                font-size: 1.5rem;
+                                                display: flex;
+                                                align-items: center;
+                                            }
+                                            
+                                            .dashboard-card h3 i {
+                                                margin-right: 10px;
+                                                color: var(--primary-blue);
+                                            }
+                                    
+                                            /* Tab content */
+                                            .tab-content {
+                                                display: none;
+                                            }
+                                            
+                                            .tab-content.active {
+                                                display: block;
+                                            }
+                                            
+                                            /* Registrations List */
+                                            .registrations-list {
+                                                display: grid;
+                                                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                                                gap: 20px;
+                                            }
+                                            
+                                            .registration-item {
+                                                border: 1px solid var(--border-color);
+                                                border-radius: 8px;
+                                                overflow: hidden;
+                                                transition: all 0.3s;
+                                                background: var(--white);
+                                            }
+                                            
+                                            .registration-item:hover {
+                                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                                                border-color: var(--light-blue);
+                                                transform: translateY(-3px);
+                                            }
+                                    
+                                            .event-image {
+                                                width: 100%;
+                                                height: 180px;
+                                                object-fit: cover;
+                                            }
+                                            
+                                            .registration-content {
+                                                padding: 20px;
+                                            }
+                                            
+                                            .registration-header {
+                                                display: flex;
+                                                justify-content: space-between;
+                                                margin-bottom: 15px;
+                                                padding-bottom: 15px;
+                                                border-bottom: 1px solid var(--border-color);
+                                            }
+                                            
+                                            .event-category {
+                                                font-size: 0.8rem;
+                                                padding: 3px 10px;
+                                                border-radius: 20px;
+                                                background: var(--light-blue);
+                                                color: var(--primary-blue);
+                                                font-weight: 600;
+                                            }
+                                            
+                                            .event-date {
+                                                color: var(--text-light);
+                                                font-size: 0.9rem;
+                                            }
+                                            
+                                            .registration-item h4 {
+                                                margin-bottom: 10px;
+                                                color: var(--text-dark);
+                                            }
+                                            
+                                            .registration-item p {
+                                                color: var(--text-light);
+                                                margin-bottom: 8px;
+                                                display: flex;
+                                                align-items: flex-start;
+                                                font-size: 0.95rem;
+                                            }
+                                            
+                                            .registration-item i {
+                                                margin-right: 8px;
+                                                color: var(--primary-blue);
+                                                width: 16px;
+                                                text-align: center;
+                                                margin-top: 3px;
+                                            }
+                                            
+                                            .event-status {
+                                                display: inline-block;
+                                                padding: 3px 10px;
+                                                border-radius: 20px;
+                                                font-size: 0.8rem;
+                                                font-weight: 600;
+                                                margin-top: 10px;
+                                            }
+                                            
+                                            .status-confirmed {
+                                                background-color: rgba(40, 167, 69, 0.1);
+                                                color: var(--success-green);
+                                            }
+                                            
+                                            .status-pending {
+                                                background-color: rgba(255, 193, 7, 0.1);
+                                                color: var(--warning-orange);
+                                            }
+                                            
+                                            .status-cancelled {
+                                                background-color: rgba(220, 53, 69, 0.1);
+                                                color: var(--danger-red);
+                                            }
+                                    
+                                            .status-completed {
+                                                background-color: rgba(108, 117, 125, 0.1);
+                                                color: var(--text-light);
+                                            }
+                                            
+                                            .event-actions {
+                                                margin-top: 20px;
+                                                display: flex;
+                                                gap: 10px;
+                                            }
+                                            
+                                            .btn {
+                                                padding: 10px 20px;
+                                                font-size: 0.9rem;
+                                                border-radius: 4px;
+                                                text-decoration: none;
+                                                font-weight: 600;
+                                                transition: all 0.3s;
+                                                display: inline-flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                            }
+                                            
+                                            .btn i {
+                                                margin-right: 8px;
+                                            }
+                                            
+                                            .btn-primary {
+                                                background-color: var(--primary-blue);
+                                                color: var(--white);
+                                                border: none;
+                                            }
+                                            
+                                            .btn-primary:hover {
+                                                background-color: var(--dark-blue);
+                                                transform: translateY(-2px);
+                                            }
+                                            
+                                            .btn-outline {
+                                                border: 1px solid var(--primary-blue);
+                                                color: var(--primary-blue);
+                                                background: var(--white);
+                                            }
+                                            
+                                            .btn-outline:hover {
+                                                background-color: var(--light-blue);
+                                                transform: translateY(-2px);
+                                            }
+                                            
+                                            .btn-success {
+                                                background-color: var(--success-green);
+                                                color: var(--white);
+                                                border: none;
+                                            }
+                                            
+                                            .btn-success:hover {
+                                                background-color: #218838;
+                                                transform: translateY(-2px);
+                                            }
+                                    
+                                            .btn-danger {
+                                                background-color: var(--danger-red);
+                                                color: var(--white);
+                                                border: none;
+                                            }
+                                            
+                                            .btn-danger:hover {
+                                                background-color: #c82333;
+                                                transform: translateY(-2px);
+                                            }
+                                            
+                                            .no-registrations {
+                                                text-align: center;
+                                                padding: 40px;
+                                                color: var(--text-light);
+                                                grid-column: 1 / -1;
+                                            }
+                                    
+                                            /* Certificate Styles */
+                                            .certificate-grid {
+                                                display: grid;
+                                                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                                                gap: 20px;
+                                            }
+                                    
+                                            .certificate-card {
+                                                background: var(--white);
+                                                border-radius: 8px;
+                                                overflow: hidden;
+                                                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                                                transition: transform 0.3s;
+                                            }
+                                    
+                                            .certificate-card:hover {
+                                                transform: translateY(-5px);
+                                                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                                            }
+                                    
+                                            .certificate-preview {
+                                                height: 180px;
+                                                background: linear-gradient(45deg, var(--light-blue), var(--primary-blue));
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                color: var(--white);
+                                                font-size: 3rem;
+                                            }
+                                    
+                                            .certificate-content {
+                                                padding: 20px;
+                                            }
+                                    
+                                            .certificate-content h4 {
+                                                margin-bottom: 10px;
+                                            }
+                                    
+                                            .certificate-details {
+                                                margin-bottom: 15px;
+                                                color: var(--text-light);
+                                                font-size: 0.9rem;
+                                            }
+                                    
+                                            .favorite-toggle {
+                                                border: none;
+                                                background: none;
+                                                color: #ccc;
+                                                font-size: 1.2rem;
+                                                cursor: pointer;
+                                                transition: all 0.3s;
+                                                position: absolute;
+                                                top: 10px;
+                                                right: 10px;
+                                                z-index: 10;
+                                                background-color: rgba(255, 255, 255, 0.7);
+                                                width: 30px;
+                                                height: 30px;
+                                                border-radius: 50%;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                            }
+                                    
+                                            .favorite-toggle.active {
+                                                color: #ffc107;
+                                            }
+                                    
+                                            .event-item-wrapper {
+                                                position: relative;
+                                            }
+                                            
+                                            /* Footer */
+                                            footer {
+                                                background-color: var(--text-dark);
+                                                color: var(--white);
+                                                padding: 80px 5% 40px;
+                                                margin-top: 60px;
+                                            }
+                                            
+                                            .footer-content {
+                                                max-width: 1200px;
+                                                margin: 0 auto;
+                                                display: grid;
+                                                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                                                gap: 60px;
+                                            }
+                                            
+                                            .footer-section h3 {
+                                                font-size: 1.2rem;
+                                                margin-bottom: 25px;
+                                                font-weight: 600;
+                                                color: var(--white);
+                                            }
+                                            
+                                            .footer-section p {
+                                                margin-bottom: 20px;
+                                                color: rgba(255, 255, 255, 0.7);
+                                                font-size: 0.9rem;
+                                                line-height: 1.6;
+                                            }
+                                            
+                                            .social-icons {
+                                                display: flex;
+                                                gap: 15px;
+                                            }
+                                            
+                                            .social-icons a {
+                                                color: var(--white);
+                                                font-size: 1.2rem;
+                                                transition: color 0.3s;
+                                            }
+                                            
+                                            .social-icons a:hover {
+                                                color: var(--primary-blue);
+                                            }
+                                            
+                                            .footer-section ul {
+                                                list-style: none;
+                                            }
+                                            
+                                            .footer-section li {
+                                                margin-bottom: 12px;
+                                            }
+                                            
+                                            .footer-section a {
+                                                color: rgba(255, 255, 255, 0.7);
+                                                text-decoration: none;
+                                                transition: color 0.3s;
+                                                font-size: 0.9rem;
+                                            }
+                                            
+                                            .footer-section a:hover {
+                                                color: var(--white);
+                                            }
+                                            
+                                            .footer-bottom {
+                                                text-align: center;
+                                                padding-top: 40px;
+                                                margin-top: 40px;
+                                                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                                                color: rgba(255, 255, 255, 0.5);
+                                                font-size: 0.8rem;
+                                            }
+                                            
+                                            /* Responsive Styles */
+                                            @media (max-width: 992px) {
+                                                .dashboard-hero h1 {
+                                                    font-size: 2rem;
+                                                }
+                                                
+                                                .user-profile {
+                                                    flex-direction: column;
+                                                    text-align: center;
+                                                }
+                                                
+                                                .user-avatar {
+                                                    margin-right: 0;
+                                                    margin-bottom: 20px;
+                                                }
+                                    
+                                                .registrations-list {
+                                                    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                                                }
+                                            }
+                                            
+                                            @media (max-width: 768px) {
+                                                .nav-links {
+                                                    display: none;
+                                                    position: absolute;
+                                                    top: 70px;
+                                                    left: 0;
+                                                    width: 100%;
+                                                    background: var(--white);
+                                                    flex-direction: column;
+                                                    padding: 20px;
+                                                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                                                }
+                                                
+                                                .nav-links.active {
+                                                    display: flex;
+                                                }
+                                                
+                                                .nav-links li {
+                                                    margin: 10px 0;
+                                                }
+                                                
+                                                .burger {
+                                                    display: block;
+                                                }
+                                                
+                                                .dashboard-hero {
+                                                    height: 250px;
+                                                }
+                                                
+                                                .dashboard-hero h1 {
+                                                    font-size: 1.8rem;
+                                                }
+                                                
+                                                .dashboard-hero p {
+                                                    font-size: 1rem;
+                                                }
+                                    
+                                                .certificate-grid {
+                                                    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                                                }
+                                    
+                                                .registrations-list {
+                                                    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                                                }
+                                            }
+                                            
+                                            @media (max-width: 576px) {
+                                                .registrations-list {
+                                                    grid-template-columns: 1fr;
+                                                }
+                                    
+                                                .certificate-grid {
+                                                    grid-template-columns: 1fr;
+                                                }
+                                                
+                                                .event-actions {
+                                                    flex-direction: column;
+                                                }
+                                                
+                                                .btn {
+                                                    width: 100%;
+                                                }
+                                    
+                                                .dashboard-tabs {
+                                                    padding-bottom: 5px;
+                                                }
+                                    
+                                                .tab {
+                                                    padding: 12px 20px;
+                                                    font-size: 0.9rem;
+                                                }
+                                                
+            .certificate-opportunities-list {
+                margin-top: 20px;
+            }
+            
+            .opportunity-item {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                padding: 15px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                margin-bottom: 15px;
+                transition: all 0.3s ease;
+            }
+            
+            .opportunity-item:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+                border-color: var(--primary-blue);
+            }
+            
+            .opportunity-icon {
+                width: 50px;
+                height: 50px;
+                background-color: var(--light-blue);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                color: var(--primary-blue);
+                flex-shrink: 0;
+            }
+            
+            .opportunity-content {
+                flex-grow: 1;
+            }
+            
+            .opportunity-content h4 {
+                margin-bottom: 5px;
+                color: var(--text-dark);
+            }
+            
+            .opportunity-content p {
+                margin-bottom: 10px;
+                color: var(--text-light);
+                font-size: 0.9rem;
+            }
+            
+            .btn-sm {
+                padding: 5px 15px;
+                font-size: 0.8rem;
+            }
+            
+            @media (max-width: 576px) {
+                .opportunity-item {
+                    flex-direction: column;
+                    text-align: center;
+                }
+                
+                .opportunity-icon {
+                    margin-bottom: 10px;
+                }
+            }
+        
+
+                                            }
+                                        </style>
+                                    </head>
+                                    <body>
+                                        <!-- Navigation -->
+                                        <nav>
+                                            <div class="logo">
+                                                <a href="#">CollegeEvents</a>
+                                            </div>
+                                            <ul class="nav-links">
+                                                <!-- <li><a href="../index.html">Home</a></li> -->
+                                               
+                                                <li>
+                                                    <div class="user-menu">
+                                                        <span class="user-name">John D.</span>
+                                                        <i class="fas fa-user-circle"></i>
+                                                        <div class="user-dropdown">
+                                                            <!-- <a href="profile.html"><i class="fas fa-user"></i> My Profile</a> -->
+                                                            <!-- <a href="settings.html"><i class="fas fa-cog"></i> Settings</a> -->
+                                                            <a href="../index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <div class="burger">
+                                                <i class="fas fa-bars"></i>
+                                            </div>
+                                        </nav>
+                                    
+                                        <!-- Dashboard Hero -->
+                                        <section class="dashboard-hero">
+                                            <div class="hero-content">
+                                                <h1>Welcome Back, John!</h1>
+                                                <p>Manage your event registrations, view upcoming events, and track your participation history</p>
+                                            </div>
+                                        </section>
+                                    
+                                        <!-- Dashboard Content -->
+                                        <div class="dashboard-container">
+                                            <div class="user-profile">
+                                                <div class="user-avatar">JD</div>
+                                                <div class="user-info">
+                                                    <h2>John Doe</h2>
+                                                    <p><i class="fas fa-graduation-cap"></i> Computer Science | 3rd Year | Section A</p>
+                                                    <p><i class="fas fa-envelope"></i> john.doe@college.edu</p>
+                                                    <p><i class="fas fa-id-card"></i> Student ID: CS20230045</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="stats-grid">
+                                                <div class="stat-card">
+                                                    <i class="fas fa-calendar-check"></i>
+                                                    <div class="stat-number">5</div>
+                                                    <div class="stat-label">Upcoming Events</div>
+                                                </div>
+                                                <div class="stat-card">
+                                                    <i class="fas fa-trophy"></i>
+                                                    <div class="stat-number">12</div>
+                                                    <div class="stat-label">Events Attended</div>
+                                                </div>
+                                                <div class="stat-card">
+                                                    <i class="fas fa-star"></i>
+                                                    <div class="stat-number">3</div>
+                                                    <div class="stat-label">Favorite Events</div>
+                                                </div>
+                                                <div class="stat-card">
+                                                    <i class="fas fa-certificate"></i>
+                                                    <div class="stat-number">2</div>
+                                                    <div class="stat-label">Certificates Earned</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="dashboard-tabs">
+                                                <div class="tab" data-tab="registrations">My Registrations</div>
+                                                <div class="tab active" data-tab="upcoming">Upcoming Events</div>
+                                                <div class="tab" data-tab="past">Past Events</div>
+                                                <div class="tab" data-tab="favorites">Favorites</div>
+                                                <div class="tab" data-tab="certificates">Certificates</div>
+                                            </div>
+                                            
+                                            <!-- My Registrations Tab -->
+                                            <div class="tab-content" id="registrations-tab">
+                                                <div class="dashboard-card">
+                                                    <h3><i class="fas fa-clipboard-list"></i> My Event Registrations</h3>
+                                                    
+                                                    <div class="registrations-list">
+                                                        <div class="event-item-wrapper">
+                                                            <button class="favorite-toggle"><i class="far fa-star"></i></button>
+                                                            <div class="registration-item">
+                                                                <img src="../images/spurthi.jpg" alt="Tech Symposium" class="event-image">
+                                                                <div class="registration-content">
+                                                                    <div class="registration-header">
+                                                                        <span class="event-category">Tech Symposium</span>
+                                                                        <span class="event-date">May 15, 2025</span>
+                                                                    </div>
+                                                                    <h4>Annual Tech Symposium 2025</h4>
+                                                                    <p><i class="fas fa-map-marker-alt"></i> Main Auditorium, Engineering Block</p>
+                                                                    <p><i class="fas fa-clock"></i> 9:00 AM - 5:00 PM</p>
+                                                                    <span class="event-status status-confirmed">Confirmed</span>
+                                                                    <div class="event-actions">
+                                                                        <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                        <a href="ticket.html" class="btn btn-outline"><i class="fas fa-ticket-alt"></i> View Ticket</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="event-item-wrapper">
+                                                            <button class="favorite-toggle active"><i class="fas fa-star"></i></button>
+                                                            <div class="registration-item">
+                                                                <img src="../images/Ml explore.jpg" alt="AI Workshop" class="event-image">
+                                                                <div class="registration-content">
+                                                                    <div class="registration-header">
+                                                                        <span class="event-category">Workshop</span>
+                                                                        <span class="event-date">April 28, 2025</span>
+                                                                    </div>
+                                                                    <h4>AI & Machine Learning Workshop</h4>
+                                                                    <p><i class="fas fa-map-marker-alt"></i> Computer Lab 3, CSE Department</p>
+                                                                    <p><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</p>
+                                                                    <span class="event-status status-confirmed">Confirmed</span>
+                                                                    <div class="event-actions">
+                                                                        <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                        <a href="ticket.html" class="btn btn-outline"><i class="fas fa-ticket-alt"></i> View Ticket</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="event-item-wrapper">
+                                                            <button class="favorite-toggle"><i class="far fa-star"></i></button>
+                                                            <div class="registration-item">
+                                                                <img src="../images/ann.jpg" alt="Cultural Festival" class="event-image">
+                                                                <div class="registration-content">
+                                                                    <div class="registration-header">
+                                                                        <span class="event-category">Annual day</span>
+                                                                        <span class="event-date">April 10, 2025</span>
+                                                                    </div>
+                                                                    <h4>Spring Cultural Festival</h4>
+                                                                    <p><i class="fas fa-map-marker-alt"></i> College Grounds</p>
+                                                                    <p><i class="fas fa-clock"></i> 4:00 PM - 10:00 PM</p>
+                                                                    <span class="event-status status-pending">Payment Pending</span>
+                                                                    <div class="event-actions">
+                                                                        <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                        <a href="payment.html" class="btn btn-success"><i class="fas fa-credit-card"></i> Complete Payment</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    
+                                            <!-- Upcoming Events Tab -->
+                                            <div class="tab-content active" id="upcoming-tab">
+                                                <div class="dashboard-card">
+                                                    <h3><i class="fas fa-calendar-alt"></i> Upcoming Events</h3>
+                                                    
+                                                    <div class="registrations-list">
+                                                        <div class="event-item-wrapper">
+                                                            <button class="favorite-toggle"><i class="far fa-star"></i></button>
+                                                            <div class="registration-item">
+                                                                <img src="../images/spurthi.jpg" alt="Tech Symposium" class="event-image">
+                                                                <div class="registration-content">
+                                                                    <div class="registration-header">
+                                                                        <span class="event-category">Tech Symposium</span>
+                                                                        <span class="event-date">May 15, 2025</span>
+                                                                    </div>
+                                                                    <h4>Annual Tech Symposium 2025</h4>
+                                                                    <p><i class="fas fa-map-marker-alt"></i> Main Auditorium, Engineering Block</p>
+                                                                    <p><i class="fas fa-clock"></i> 9:00 AM - 5:00 PM</p>
+                                                                    <p><i class="fas fa-user-plus"></i> 235 Attending</p>
+                                                                    <div class="event-actions">
+                                                                        <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                        <a href="register.html" class="btn btn-outline"><i class="fas fa-ticket-alt"></i> Register</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+                                                            
+                                                            <div class="event-item-wrapper">
+                                                                <button class="favorite-toggle"><i class="far fa-star"></i></button>
+                                                                <div class="registration-item">
+                                                                    <img src="../images/prajwalan.jpg" alt="Hackathon" class="event-image">
+                                                                    <div class="registration-content">
+                                                                        <div class="registration-header">
+                                                                            <span class="event-category">Competition</span>
+                                                                            <span class="event-date">May 5-6, 2025</span>
+                                                                        </div>
+                                                                        <h4>24-Hour Hackathon Challenge</h4>
+                                                                        <p><i class="fas fa-map-marker-alt"></i> Innovation Center</p>
+                                                                        <p><i class="fas fa-clock"></i> 10:00 AM (Day 1) - 10:00 AM (Day 2)</p>
+                                                                        <p><i class="fas fa-user-plus"></i> 104 Attending</p>
+                                                                        <div class="event-actions">
+                                                                            <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                            <a href="register.html" class="btn btn-outline"><i class="fas fa-ticket-alt"></i> Register</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Past Events Tab -->
+                                                <div class="tab-content" id="past-tab">
+                                                    <div class="dashboard-card">
+                                                        <h3><i class="fas fa-history"></i> Past Events</h3>
+                                                        
+                                                        <div class="registrations-list">
+                                                            <div class="event-item-wrapper">
+                                                                <button class="favorite-toggle"><i class="far fa-star"></i></button>
+                                                                <div class="registration-item">
+                                                                    <img src="../images/vajra.jpg" alt="Web Dev Workshop" class="event-image">
+                                                                    <div class="registration-content">
+                                                                        <div class="registration-header">
+                                                                            <span class="event-category">Workshop</span>
+                                                                            <span class="event-date">March 12, 2025</span>
+                                                                        </div>
+                                                                        <h4>Advanced Development Workshop</h4>
+                                                                        <p><i class="fas fa-map-marker-alt"></i> Computer Lab 2</p>
+                                                                        <p><i class="fas fa-clock"></i> 2:00 PM - 6:00 PM</p>
+                                                                        <span class="event-status status-completed">Attended</span>
+                                                                        <div class="event-actions">
+                                                                            <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                            <a href="feedback.html" class="btn btn-outline"><i class="fas fa-comment"></i> Submit Feedback</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="event-item-wrapper">
+                                                                <button class="favorite-toggle active"><i class="fas fa-star"></i></button>
+                                                                <div class="registration-item">
+                                                                    <img src="../images/meet.jpg" alt="Leadership Summit" class="event-image">
+                                                                    <div class="registration-content">
+                                                                        <div class="registration-header">
+                                                                            <span class="event-category">Conference</span>
+                                                                            <span class="event-date">February 25, 2025</span>
+                                                                        </div>
+                                                                        <h4>Student Leadership Summit</h4>
+                                                                        <p><i class="fas fa-map-marker-alt"></i> Conference Hall</p>
+                                                                        <p><i class="fas fa-clock"></i> 9:30 AM - 4:30 PM</p>
+                                                                        <span class="event-status status-completed">Attended</span>
+                                                                        <div class="event-actions">
+                                                                            <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                            <a href="certificate.html" class="btn btn-success"><i class="fas fa-certificate"></i> View Certificate</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="event-item-wrapper">
+                                                                <button class="favorite-toggle"><i class="far fa-star"></i></button>
+                                                                <div class="registration-item">
+                                                                    <img src="../images/games.jpg" alt="Sports Competition" class="event-image">
+                                                                    <div class="registration-content">
+                                                                        <div class="registration-header">
+                                                                            <span class="event-category">Sports</span>
+                                                                            <span class="event-date">January 18, 2025</span>
+                                                                        </div>
+                                                                        <h4>Inter-Department Sports Competition</h4>
+                                                                        <p><i class="fas fa-map-marker-alt"></i> College Sports Ground</p>
+                                                                        <p><i class="fas fa-clock"></i> 8:00 AM - 5:00 PM</p>
+                                                                        <span class="event-status status-cancelled">Cancelled</span>
+                                                                        <div class="event-actions">
+                                                                            <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Favorites Tab -->
+                                                <div class="tab-content" id="favorites-tab">
+                                                    <div class="dashboard-card">
+                                                        <h3><i class="fas fa-heart"></i> My Favorite Events</h3>
+                                                        
+                                                        <div class="registrations-list">
+                                                            <div class="event-item-wrapper">
+                                                                <button class="favorite-toggle active"><i class="fas fa-star"></i></button>
+                                                                <div class="registration-item">
+                                                                    <img src="../images/Ml explore.jpg" alt="AI Workshop" class="event-image">
+                                                                    <div class="registration-content">
+                                                                        <div class="registration-header">
+                                                                            <span class="event-category">Workshop</span>
+                                                                            <span class="event-date">April 28, 2025</span>
+                                                                        </div>
+                                                                        <h4>AI & Machine Learning Workshop</h4>
+                                                                        <p><i class="fas fa-map-marker-alt"></i> Computer Lab 3, CSE Department</p>
+                                                                        <p><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</p>
+                                                                        <span class="event-status status-confirmed">Confirmed</span>
+                                                                        <div class="event-actions">
+                                                                            <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                            <a href="ticket.html" class="btn btn-outline"><i class="fas fa-ticket-alt"></i> View Ticket</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="event-item-wrapper">
+                                                                <button class="favorite-toggle active"><i class="fas fa-star"></i></button>
+                                                                <div class="registration-item">
+                                                                    <img src="../images/meet.jpg" alt="Leadership Summit" class="event-image">
+                                                                    <div class="registration-content">
+                                                                        <div class="registration-header">
+                                                                            <span class="event-category">Conference</span>
+                                                                            <span class="event-date">February 25, 2025</span>
+                                                                        </div>
+                                                                        <h4>Student Leadership Summit</h4>
+                                                                        <p><i class="fas fa-map-marker-alt"></i> Conference Hall</p>
+                                                                        <p><i class="fas fa-clock"></i> 9:30 AM - 4:30 PM</p>
+                                                                        <span class="event-status status-completed">Attended</span>
+                                                                        <div class="event-actions">
+                                                                            <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                            <a href="certificate.html" class="btn btn-success"><i class="fas fa-certificate"></i> View Certificate</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="event-item-wrapper">
+                                                                <button class="favorite-toggle active"><i class="fas fa-star"></i></button>
+                                                                <div class="registration-item">
+                                                                    <img src="../images/WhatsApp Image 2025-02-19 at 12.52.35_5b9b076b.jpg" alt="Career Fair" class="event-image">
+                                                                    <div class="registration-content">
+                                                                        <div class="registration-header">
+                                                                            <span class="event-category">Career</span>
+                                                                            <span class="event-date">May 22, 2025</span>
+                                                                        </div>
+                                                                        <h4>Spring Career Fair 2025</h4>
+                                                                        <p><i class="fas fa-map-marker-alt"></i> College Main Hall</p>
+                                                                        <p><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</p>
+                                                                        <p><i class="fas fa-user-plus"></i> 320 Attending</p>
+                                                                        <div class="event-actions">
+                                                                            <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                            <a href="dashregister.html" class="btn btn-outline"><i class="fas fa-ticket-alt"></i> Register</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-content" id="favorites-tab">
+                                                    <div class="dashboard-card">
+                                                        <h3><i class="fas fa-heart"></i> My Favorite Events</h3>
+                                                        
+                                                        <div class="registrations-list">
+                                                            <div class="event-item-wrapper">
+                                                                <button class="favorite-toggle active"><i class="fas fa-star"></i></button>
+                                                                <div class="registration-item">
+                                                                    <img src="../images/Ml explore.jpg" alt="AI Workshop" class="event-image">
+                                                                    <div class="registration-content">
+                                                                        <div class="registration-header">
+                                                                            <span class="event-category">Workshop</span>
+                                                                            <span class="event-date">April 28, 2025</span>
+                                                                        </div>
+                                                                        <h4>AI & Machine Learning Workshop</h4>
+                                                                        <p><i class="fas fa-map-marker-alt"></i> Computer Lab 3, CSE Department</p>
+                                                                        <p><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</p>
+                                                                        <span class="event-status status-confirmed">Confirmed</span>
+                                                                        <div class="event-actions">
+                                                                            <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                            <a href="ticket.html" class="btn btn-outline"><i class="fas fa-ticket-alt"></i> View Ticket</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="event-item-wrapper">
+                                                                <button class="favorite-toggle active"><i class="fas fa-star"></i></button>
+                                                                <div class="registration-item">
+                                                                    <img src="../images/meet.jpg" alt="Leadership Summit" class="event-image">
+                                                                    <div class="registration-content">
+                                                                        <div class="registration-header">
+                                                                            <span class="event-category">Conference</span>
+                                                                            <span class="event-date">February 25, 2025</span>
+                                                                        </div>
+                                                                        <h4>Student Leadership Summit</h4>
+                                                                        <p><i class="fas fa-map-marker-alt"></i> Conference Hall</p>
+                                                                        <p><i class="fas fa-clock"></i> 9:30 AM - 4:30 PM</p>
+                                                                        <span class="event-status status-completed">Attended</span>
+                                                                        <div class="event-actions">
+                                                                            <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                            <a href="certificate.html" class="btn btn-success"><i class="fas fa-certificate"></i> View Certificate</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="event-item-wrapper">
+                                                                <button class="favorite-toggle active"><i class="fas fa-star"></i></button>
+                                                                <div class="registration-item">
+                                                                    <img src="../images/sankalp.jpg" alt="Career Fair" class="event-image">
+                                                                    <div class="registration-content">
+                                                                        <div class="registration-header">
+                                                                            <span class="event-category">Career</span>
+                                                                            <span class="event-date">May 22, 2025</span>
+                                                                        </div>
+                                                                        <h4>Spring Career Fair 2025</h4>
+                                                                        <p><i class="fas fa-map-marker-alt"></i> College Main Hall</p>
+                                                                        <p><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</p>
+                                                                        <p><i class="fas fa-user-plus"></i> 320 Attending</p>
+                                                                        <div class="event-actions">
+                                                                            <a href="event-details.html" class="btn btn-primary"><i class="fas fa-info-circle"></i> Details</a>
+                                                                            <a href="dashregister.html" class="btn btn-outline"><i class="fas fa-ticket-alt"></i> Register</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Certificates Tab Content -->
+                                                <div class="tab-content" id="certificates-tab">
+                                                    <div class="dashboard-card">
+                                                        <h3><i class="fas fa-certificate"></i> My Certificates</h3>
+                                                        
+                                                        <div class="certificate-grid">
+                                                            <div class="certificate-card">
+                                                                <div class="certificate-preview">
+                                                                    <i class="fas fa-certificate"></i>
+                                                                </div>
+                                                                <div class="certificate-content">
+                                                                    <h4>Student Leadership Summit</h4>
+                                                                    <div class="certificate-details">
+                                                                        <p>Issued on: February 25, 2025</p>
+                                                                        <p>Certificate ID: SLS-2025-JD045</p>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="certificate-card">
+                                                                <div class="certificate-preview">
+                                                                    <i class="fas fa-certificate"></i>
+                                                                </div>
+                                                                <div class="certificate-content">
+                                                                    <h4>Web Development Workshop</h4>
+                                                                    <div class="certificate-details">
+                                                                        <p>Issued on: January 15, 2025</p>
+                                                                        <p>Certificate ID: WDW-2025-JD028</p>
+                                                                    </div>
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- Add an additional certificate with more details -->
+                                                            <div class="certificate-card">
+                                                                <div class="certificate-preview">
+                                                                    <i class="fas fa-certificate"></i>
+                                                                </div>
+                                                                <div class="certificate-content">
+                                                                    <h4>Cloud Computing Masterclass</h4>
+                                                                    <div class="certificate-details">
+                                                                        <p>Issued on: March 8, 2025</p>
+                                                                        <p>Certificate ID: CCM-2025-JD056</p>
+                                                                        <p>Instructor: Prof. Sarah Johnson</p>
+                                                                    </div>
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                 
+                                                
+                                                <!-- Certificates Tab -->
+                                                <div class="tab-content" id="certificates-tab">
+                                                    <div class="dashboard-card">
+                                                        <h3><i class="fas fa-certificate"></i> My Certificates</h3>
+                                                        
+                                                        <div class="certificate-grid">
+                                                            <div class="certificate-card">
+                                                                <div class="certificate-preview">
+                                                                    <i class="fas fa-certificate"></i>
+                                                                </div>
+                                                                <div class="certificate-content">
+                                                                    <h4>Student Leadership Summit</h4>
+                                                                    <div class="certificate-details">
+                                                                        <p>Issued on: February 25, 2025</p>
+                                                                        <p>Certificate ID: SLS-2025-JD045</p>
+                                                                    </div>
+                                                                    <!-- <div class="event-actions">
+                                                                        <a href="view-certificate.html" class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
+                                                                        <a href="download-certificate.html" class="btn btn-outline"><i class="fas fa-download"></i> Download</a>
+                                                                    </div> -->
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="certificate-card">
+                                                                <div class="certificate-preview">
+                                                                    <i class="fas fa-certificate"></i>
+                                                                </div>
+                                                                <div class="certificate-content">
+                                                                    <h4>Web Development Workshop</h4>
+                                                                    <div class="certificate-details">
+                                                                        <p>Issued on: January 15, 2025</p>
+                                                                        <p>Certificate ID: WDW-2025-JD028</p>
+                                                                    </div>
+                                                                    <div class="event-actions">
+                                                                        <!-- <a href="view-certificate.html" class="btn btn-primary"><i class="fas fa-eye"></i> View</a>
+                                                                        <a href="download-certificate.html" class="btn btn-outline"><i class="fas fa-download"></i> Download</a> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                           
+                                            
+                                            <script>
+                                                // Toggle user dropdown
+                                                document.querySelector('.user-menu').addEventListener('click', function() {
+                                                    document.querySelector('.user-dropdown').style.display = 
+                                                        document.querySelector('.user-dropdown').style.display === 'block' ? 'none' : 'block';
+                                                });
+                                                
+                                                // Close dropdown when clicking outside
+                                                document.addEventListener('click', function(e) {
+                                                    if (!e.target.closest('.user-menu')) {
+                                                        document.querySelector('.user-dropdown').style.display = 'none';
+                                                    }
+                                                });
+                                                
+                                                // Mobile menu toggle
+                                                document.querySelector('.burger').addEventListener('click', function() {
+                                                    document.querySelector('.nav-links').classList.toggle('active');
+                                                });
+                                                
+                                                // Tab functionality
+                                                document.querySelectorAll('.tab').forEach(tab => {
+                                                    tab.addEventListener('click', function() {
+                                                        // Remove active class from all tabs
+                                                        document.querySelectorAll('.tab').forEach(t => {
+                                                            t.classList.remove('active');
+                                                        });
+                                                        
+                                                        // Add active class to clicked tab
+                                                        this.classList.add('active');
+                                                        
+                                                        // Hide all tab content
+                                                        document.querySelectorAll('.tab-content').forEach(content => {
+                                                            content.classList.remove('active');
+                                                        });
+                                                        
+                                                        // Show the selected tab content
+                                                        const tabId = this.getAttribute('data-tab') + '-tab';
+                                                        document.getElementById(tabId).classList.add('active');
+                                                    });
+                                                });
+                                                
+                                                // Favorite toggle functionality
+                                                document.querySelectorAll('.favorite-toggle').forEach(button => {
+                                                    button.addEventListener('click', function(e) {
+                                                        e.preventDefault();
+                                                        this.classList.toggle('active');
+                                                        
+                                                        // Change icon
+                                                        const icon = this.querySelector('i');
+                                                        if (this.classList.contains('active')) {
+                                                            icon.classList.remove('far');
+                                                            icon.classList.add('fas');
+                                                        } else {
+                                                            icon.classList.remove('fas');
+                                                            icon.classList.add('far');
+                                                        }
+                                                    });
+                                                });
+                                                
+                                                // Define CSS variables here since they were missing in the original CSS
+                                                document.documentElement.style.setProperty('--primary-blue', '#1e88e5');
+                                                document.documentElement.style.setProperty('--dark-blue', '#1565c0');
+                                                document.documentElement.style.setProperty('--light-blue', '#e3f2fd');
+                                                document.documentElement.style.setProperty('--white', '#ffffff');
+                                                document.documentElement.style.setProperty('--light-gray', '#f5f7fa');
+                                                document.documentElement.style.setProperty('--text-dark', '#333333');
+                                                document.documentElement.style.setProperty('--text-light', '#6c757d');
+                                                document.documentElement.style.setProperty('--border-color', '#e0e0e0');
+                                                document.documentElement.style.setProperty('--success-green', '#28a745');
+                                                document.documentElement.style.setProperty('--warning-orange', '#ffc107');
+                                                document.documentElement.style.setProperty('--danger-red', '#dc3545');
+                                                document.querySelectorAll('.linkedin-share').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            // This would typically open a LinkedIn sharing dialog
+            alert('This would open LinkedIn sharing in a production environment');
+        });
+    });
+    
+    // Certificate preview functionality - would be implemented with actual certificate data
+    document.querySelectorAll('.certificate-preview').forEach(preview => {
+        preview.addEventListener('click', function() {
+            const cardParent = this.closest('.certificate-card');
+            const certTitle = cardParent.querySelector('h4').textContent;
+            alert('Opening preview for: ' + certTitle);
+        });
+    });
+     </script>
+                                        </body>
+                                        </html>

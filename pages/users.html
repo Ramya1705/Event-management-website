@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Same head content as dashboard.html -->
+    <title>User Management | CollegeEvents</title>
+</head>
+<body>
+    <!-- Same navigation as dashboard.html -->
+    
+    <div class="dashboard-container">
+        <!-- Same sidebar as dashboard.html (make sure Users link is active) -->
+        
+        <main class="main-content">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">User Management</h1>
+                <a href="#" class="btn btn-primary"><i class="fas fa-plus"></i> Add User</a>
+            </div>
+
+            <!-- Users Table -->
+            <div class="events-table">
+                <div class="table-header">
+                    <h3 class="table-title">All Users</h3>
+                    <div class="table-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search users...">
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Joined</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="display: flex; align-items: center;">
+                                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
+                                    Sarah Johnson
+                                </div>
+                            </td>
+                            <td>sarah@college.edu</td>
+                            <td>Student</td>
+                            <td>Sep 12, 2022</td>
+                            <td><span class="status active">Active</span></td>
+                            <td>
+                                <button class="action-btn btn-primary"><i class="fas fa-edit"></i> Edit</button>
+                                <button class="action-btn btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                            </td>
+                        </tr>
+                        <!-- More rows... -->
+                    </tbody>
+                </table>
+                
+                <!-- Pagination -->
+                <div style="padding: 20px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color);">
+                    <div style="color: rgba(255, 255, 255, 0.7);">
+                        Showing 1 to 10 of 1248 users
+                    </div>
+                    <div style="display: flex; gap: 5px;">
+                        <button class="btn btn-outline"><i class="fas fa-angle-left"></i> Previous</button>
+                        <button class="btn btn-primary">1</button>
+                        <button class="btn btn-outline">2</button>
+                        <button class="btn btn-outline">3</button>
+                        <button class="btn btn-outline">Next <i class="fas fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Same scripts as dashboard.html -->
+</body>
+</html>

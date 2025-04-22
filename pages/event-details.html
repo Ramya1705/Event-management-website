@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - College Events</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/events.css">
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 0;
+            width: 80%;
+            max-width: 900px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-30px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            z-index: 10;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #f44336;
+        }
+
+        .event-modal-header {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .event-modal-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .event-modal-header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+        }
+
+        .event-modal-title {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            color: #fff;
+        }
+
+        .event-modal-title h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .event-modal-title .event-category .badge {
+            font-size: 0.9rem;
+            padding: 5px 15px;
+        }
+
+        .event-modal-body {
+            padding: 30px;
+        }
+
+        .event-modal-info {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .event-info-item {
+            flex: 1;
+            min-width: 180px;
+            margin-bottom: 15px;
+        }
+
+        .event-info-item i {
+            color: #4257b2;
+            font-size: 1.2rem;
+            margin-right: 10px;
+        }
+
+        .event-info-item span {
+            font-size: 1rem;
+            color: #444;
+        }
+
+        .event-modal-description {
+            margin-bottom: 30px;
+        }
+
+        .event-modal-description h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .event-modal-description p {
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .event-modal-action {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .btn-modal-register {
+            display: inline-block;
+            background-color: #4257b2;
+            color: #fff;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-modal-register:hover {
+            background-color: #354599;
+            transform: translateY(-2px);
+        }
+
+        .event-modal-agenda {
+            margin-bottom: 30px;
+        }
+
+        .event-modal-agenda h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .agenda-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .agenda-time {
+            min-width: 120px;
+            font-weight: 600;
+            color: #4257b2;
+        }
+
+        .agenda-content {
+            flex: 1;
+        }
+
+        .agenda-content h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .agenda-content p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive fixes */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .event-modal-title h2 {
+                font-size: 1.6rem;
+            }
+
+            .event-modal-header {
+                height: 200px;
+            }
+
+            .event-info-item {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <a href="../index.html">CollegeEvents</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html" class="active">Events</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" class="login-btn">Login</a></li>
+        </ul>
+        <div class="burger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Events Hero Section -->
+    <section class="page-hero" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30');">
+        <div class="hero-content">
+            <h1>Upcoming College Events</h1>
+            <p>Discover and attend the most exciting events happening on campus</p>
+        </div>
+    </section>
+
+    <!-- Events Filter -->
+    <section class="events-filter">
+        <div class="container">
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label for="event-category">Category</label>
+                    <select id="event-category">
+                        <option value="all">All Categories</option>
+                        <option value="academic">Academic</option>
+                        <option value="cultural">Cultural</option>
+                        <option value="sports">Sports</option>
+                        <option value="career">Career</option>
+                        <option value="social">Social</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="event-date">Date</label>
+                    <select id="event-date">
+                        <option value="all">All Dates</option>
+                        <option value="today">Today</option>
+                        <option value="tomorrow">Tomorrow</option>
+                        <option value="this-week">This Week</option>
+                        <option value="this-month">This Month</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="event-location">Location</label>
+                    <select id="event-location">
+                        <option value="all">All Locations</option>
+                        <option value="campus-center">Campus Center</option>
+                        <option value="student-union">Student Union</option>
+                        <option value="sports-complex">Sports Complex</option>
+                        <option value="main-auditorium">Main Auditorium</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button id="filter-button" class="filter-btn">Apply Filters</button>
+                </div>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search events...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events List -->
+    <section class="events-list">
+        <div class="container">
+            <!-- Event 1 -->
+            <div class="event-card" data-event-id="event1">
+                <div class="event-image">
+                    <img src="../images/crux.jpg" alt="CRUX-2k25">
+                    <div class="event-date">
+                        <span class="day">4</span>
+                        <span class="month">APR</span>
+                    </div>
+                </div>
+                <div class="event-details">
+                    <div class="event-category">
+                        <span class="badge academic">Academic</span>
+                    </div>
+                    <h3><a href="#" class="event-detail-link">CRUX-2k25</a></h3>
+                    <div class="event-meta">
+                        <span><i class="fas fa-clock"></i> 9:30 AM - 5:00 PM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Department of ECE</span>
+                    </div>
+                    <p>CRUX-2k25 is a catalyst for innovation, a melting pot of ideas, and a launchpad for future tech leaders.</p>
+                    <div class="event-actions">
+                        <a href="#" class="btn-details event-detail-link">View Details</a>
+                        <a href="register.html" class="btn-register">Register</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-card" data-event-id="event2">
+                <div class="event-image">
+                    <img src="../images/python workshop.jpg" alt="Python Workshop">
+                    <div class="event-date">
+                        <span class="day">8</span>
+                        <span class="month">APR</span>
+                    </div>
+                </div>
+                <div class="event-details">
+                    <div class="event-category">
+                        <span class="badge academic">Workshop</span>
+                    </div>
+                    <h3><a href="#" class="event-detail-link">PYTHON WORKSHOP</a></h3>
+                    <div class="event-meta">
+                        <span><i class="fas fa-clock"></i> 9:30 AM - 4:30 PM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> SRKREC</span>
+                    </div>
+                    <p>SRKR coding club is organizing a python one-day workshop exclusively for 1st and 2nd-year coding club affiliates.</p>
+                    <div class="event-actions">
+                        <a href="#" class="btn-details event-detail-link">View Details</a>
+                        <a href="register.html" class="btn-register">Register</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card" data-event-id="event3">
+                <div class="event-image">
+                    <img src="../images/ann.jpg" alt="Flash Mob">
+                    <div class="event-date">
+                        <span class="day">10</span>
+                        <span class="month">MAR</span>
+                    </div>
+                </div>
+                <div class="event-details">
+                    <div class="event-category">
+                        <span class="badge cultural">Cultural</span>
+                    </div>
+                    <h3><a href="#" class="event-detail-link">FLASH MOB</a></h3>
+                    <div class="event-meta">
+                        <span><i class="fas fa-clock"></i> 3:00 PM - 5:00 PM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Basket Ball Court</span>
+                    </div>
+                    <p>Calling all the dancers and enthusiasts! We're bringing back the Flashmob and this time you can be a part of it!</p>
+                    <div class="event-actions">
+                        <a href="#" class="btn-details event-detail-link">View Details</a>
+                        <a href="register.html" class="btn-register">Register</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="event-card" data-event-id="event4">
+                <div class="event-image">
+                    <img src="../images/WhatsApp Image 2025-02-19 at 12.52.35_5b9b076b.jpg" alt="Nipuna-25">
+                    <div class="event-date">
+                        <span class="day">21-22</span>
+                        <span class="month">FEB</span>
+                    </div>
+                </div>
+                <div class="event-details">
+                    <div class="event-category">
+                        <span class="badge academic">Technical</span>
+                    </div>
+                    <h3><a href="#" class="event-detail-link">Nipuna-25</a></h3>
+                    <div class="event-meta">
+                        <span><i class="fas fa-clock"></i> 9:00 AM - 4:30 PM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> SRKREC</span>
+                    </div>
+                    <p>We invite you to embark on this quest to test your skills, ignite creativity and uncover mysteries.</p>
+                    <div class="event-actions">
+                        <a href="#" class="btn-details event-detail-link">View Details</a>
+                        <a href="register.html" class="btn-register">Register</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 5 -->
+            <div class="event-card" data-event-id="event5">
+                <div class="event-image">
+                    <img src="../images/prajwalan.jpg" alt="Prajwalan 2k25">
+                    <div class="event-date">
+                        <span class="day">17-18</span>
+                        <span class="month">FEB</span>
+                    </div>
+                </div>
+                <div class="event-details">
+                    <div class="event-category">
+                        <span class="badge academic">Hackathon</span>
+                    </div>
+                    <h3><a href="#" class="event-detail-link">Prajwalan 2k25</a></h3>
+                    <div class="event-meta">
+                        <span><i class="fas fa-clock"></i> 10:00 AM - 10:00 AM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> CSE Auditorium</span>
+                    </div>
+                    <p>National Level 24-Hour Hackathon organized By ACE.</p>
+                    <div class="event-actions">
+                        <a href="#" class="btn-details event-detail-link">View Details</a>
+                        <a href="register.html" class="btn-register">Register</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event 6 -->
+            <div class="event-card" data-event-id="event6">
+                <div class="event-image">
+                    <img src="../images/ace.jpg" alt="SPURTHI'25">
+                    <div class="event-date">
+                        <span class="day">15</span>
+                        <span class="month">FEB</span>
+                    </div>
+                </div>
+                <div class="event-details">
+                    <div class="event-category">
+                        <span class="badge academic">Symposium</span>
+                    </div>
+                    <h3><a href="#" class="event-detail-link">SPURTHI'25</a></h3>
+                    <div class="event-meta">
+                        <span><i class="fas fa-clock"></i> 11:00 AM - 3:00 PM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> CSE Department</span>
+                    </div>
+                    <p>The CSE department proudly presents SPURTHI 2k25, a National-level Technical symposium.</p>
+                    <div class="event-actions">
+                        <a href="#" class="btn-details event-detail-link">View Details</a>
+                        <a href="register.html" class="btn-register">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Modal -->
+    <div id="eventModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <div class="event-modal-header">
+                <img id="modal-event-image" src="" alt="Event Image">
+                <div class="event-modal-header-overlay"></div>
+                <div class="event-modal-title">
+                    <div class="event-category">
+                        <span id="modal-event-category" class="badge"></span>
+                    </div>
+                    <h2 id="modal-event-title"></h2>
+                </div>
+            </div>
+            <div class="event-modal-body">
+                <div class="event-modal-info">
+                    <div class="event-info-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span id="modal-event-date"></span>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-clock"></i>
+                        <span id="modal-event-time"></span>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="modal-event-location"></span>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-user-friends"></i>
+                        <span id="modal-event-organizer"></span>
+                    </div>
+                </div>
+                
+                <div class="event-modal-description">
+                    <h3>Event Description</h3>
+                    <p id="modal-event-description"></p>
+                </div>
+                
+                <div class="event-modal-agenda">
+                    <h3>Event Agenda</h3>
+                    <div id="modal-event-agenda">
+                        <!-- Agenda items will be inserted dynamically -->
+                    </div>
+                </div>
+                
+                <div class="event-modal-action">
+                    <a href="register.html" class="btn-modal-register">Register for this Event</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <div class="container">
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#" class="next">Next <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Planning Your Own Event?</h2>
+            <p>We can help you organize and promote your college event</p>
+            <a href="contact.html" class="cta-button">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CollegeEvents</h3>
+                <p>Your one-stop platform for all college events and activities.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> SRKR Engineering College, Bhimavaram, Andhra Pradesh 534204, India</li>
+                    <li><i class="fas fa-phone"></i> 6301726462</li>
+                    <li><i class="fas fa-envelope"></i> srkrec@collegeevents.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CollegeEvents. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Event data - this would normally come from a database
+        const eventsData = {
+            "event1": {
+                title: "CRUX-2k25",
+                category: "Academic",
+                image: "../images/crux.jpg",
+                date: "April 4, 2025",
+                time: "9:30 AM - 5:00 PM",
+                location: "Department of ECE",
+                organizer: "ECE Department",
+                description: "CRUX-2k25 is a catalyst for innovation, a melting pot of ideas, and a launchpad for future tech leaders. This event brings together the brightest minds in the field of electronics and communication to showcase their projects and innovations. The day-long symposium will feature keynote speeches, panel discussions, and interactive sessions with industry experts and academics. Participants will have the opportunity to network with professionals and peers, gaining valuable insights into the latest trends and technologies in the field. This is an opportunity not to be missed for anyone interested in the future of electronics and communication technology.",
+                agenda: [
+                    {
+                        time: "9:30 AM - 10:00 AM",
+                        title: "Registration & Welcome Kit Distribution",
+                        description: "Check-in and receive your event materials"
+                    },
+                    {
+                        time: "10:00 AM - 11:30 AM",
+                        title: "Keynote Address: Future of Electronics",
+                        description: "By Prof. Ramesh Kumar, Head of ECE Department"
+                    },
+                    {
+                        time: "11:30 AM - 1:00 PM",
+                        title: "Project Exhibition",
+                        description: "Student projects showcase and demonstrations"
+                    },
+                    {
+                        time: "1:00 PM - 2:00 PM",
+                        title: "Lunch Break",
+                        description: "Networking lunch provided for all attendees"
+                    },
+                    {
+                        time: "2:00 PM - 3:30 PM",
+                        title: "Panel Discussion: Industry Trends",
+                        description: "Industry experts discuss current and future trends"
+                    },
+                    {
+                        time: "3:30 PM - 4:30 PM",
+                        title: "Technical Quiz",
+                        description: "Test your knowledge and win exciting prizes"
+                    },
+                    {
+                        time: "4:30 PM - 5:00 PM",
+                        title: "Awards & Closing Ceremony",
+                        description: "Recognition of outstanding projects and participation"
+                    }
+                ]
+            },
+            "event2": {
+                title: "PYTHON WORKSHOP",
+                category: "Workshop",
+                image: "../images/python workshop.jpg",
+                date: "April 8, 2025",
+                time: "9:30 AM - 4:30 PM",
+                location: "SRKREC",
+                organizer: "SRKR Coding Club",
+                description: "SRKR coding club is organizing a python one-day workshop exclusively for 1st and 2nd-year coding club affiliates. This hands-on workshop will cover Python fundamentals and practical applications, with a focus on creating real-world projects. Participants will learn essential programming concepts, data structures, and popular libraries like Pandas and NumPy. The workshop is designed to be highly interactive, with coding exercises and mini-projects throughout the day. By the end of the session, students will have built a functioning application and gained valuable skills that can be applied to future coursework and personal projects.",
+                agenda: [
+                    {
+                        time: "9:30 AM - 10:00 AM",
+                        title: "Introduction to Python",
+                        description: "Overview of Python and its applications"
+                    },
+                    {
+                        time: "10:00 AM - 11:30 AM",
+                        title: "Python Basics",
+                        description: "Syntax, variables, data types, and basic operations"
+                    },
+                    {
+                        time: "11:30 AM - 1:00 PM",
+                        title: "Functions and Modules",
+                        description: "Creating reusable code and importing libraries"
+                    },
+                    {
+                        time: "1:00 PM - 1:45 PM",
+                        title: "Lunch Break",
+                        description: "Refreshments provided"
+                    },
+                    {
+                        time: "1:45 PM - 3:15 PM",
+                        title: "Practical Project",
+                        description: "Building a simple application with Python"
+                    },
+                    {
+                        time: "3:15 PM - 4:15 PM",
+                        title: "Advanced Topics",
+                        description: "Introduction to data analysis with Pandas"
+                    },
+                    {
+                        time: "4:15 PM - 4:30 PM",
+                        title: "Q&A and Closing",
+                        description: "Addressing questions and next steps"
+                    }
+                ]
+            },
+            "event3": {
+                title: "FLASH MOB",
+                category: "Cultural",
+                image: "../images/ann.jpg",
+                date: "March 10, 2025",
+                time: "3:00 PM - 5:00 PM",
+                location: "Basketball Court",
+                organizer: "Cultural Committee",
+                description: "Calling all dancers and enthusiasts! We're bringing back the Flashmob and this time you can be a part of it! Join us for an electrifying dance performance that will surprise and delight the campus community. This event is open to dancers of all skill levels - whether you're a seasoned performer or just looking to have fun, there's a place for you in our routine. Participants will learn a choreographed routine that blends various dance styles, from hip-hop to contemporary. The event culminates in a surprise performance that will energize the entire campus. Don't miss this opportunity to showcase your talent and be part of something memorable!",
+                agenda: [
+                    {
+                        time: "3:00 PM - 3:15 PM",
+                        title: "Welcome and Introduction",
+                        description: "Overview of the event and introduction of choreographers"
+                    },
+                    {
+                        time: "3:15 PM - 4:00 PM",
+                        title: "Dance Practice",
+                        description: "Learn and practice the choreography"
+                    },
+                    {
+                        time: "4:00 PM - 4:15 PM",
+                        title: "Break",
+                        description: "Quick refreshment break"
+                    },
+                    {
+                        time: "4:15 PM - 4:45 PM",
+                        title: "Final Rehearsal",
+                        description: "Complete run-through of the performance"
+                    },
+                    {
+                        time: "4:45 PM - 5:00 PM",
+                        title: "Flash Mob Performance",
+                        description: "Surprise performance for the campus community"
+                    }
+                ]
+            },
+            "event4": {
+                title: "Nipuna-25",
+                category: "Technical",
+                image: "../images/WhatsApp Image 2025-02-19 at 12.52.35_5b9b076b.jpg",
+                date: "February 21-22, 2025",
+                time: "9:00 AM - 4:30 PM",
+                location: "SRKREC",
+                organizer: "Technical Committee",
+                description: "We invite you to embark on this quest to test your skills, ignite creativity and uncover mysteries. Nipuna-25 is a two-day technical extravaganza featuring competitions, workshops, and seminars across various engineering disciplines. The event offers students a platform to showcase their technical prowess, innovative ideas, and problem-solving abilities. Competitions include coding challenges, robotics demonstrations, circuit design, and paper presentations. Industry experts and academic leaders will conduct workshops on emerging technologies and career opportunities. Substantial prizes await the winners in each category, making this not just an educational event but also a competitive one.",
+                agenda: [
+                    {
+                        time: "Day 1: 9:00 AM - 10:00 AM",
+                        title: "Inauguration Ceremony",
+                        description: "Opening remarks by the Principal and Chief Guest"
+                    },
+                    {
+                        time: "Day 1: 10:00 AM - 1:00 PM",
+                        title: "Technical Paper Presentations",
+                        description: "Student research presentations across multiple tracks"
+                    },
+                    {
+                        time: "Day 1: 1:00 PM - 2:00 PM",time: "Day 1: 1:00 PM - 2:00 PM",
+                        title: "Lunch Break",
+                        description: "Networking lunch"
+                    },
+                    {
+                        time: "Day 1: 2:00 PM - 4:30 PM",
+                        title: "Technical Competitions - Round 1",
+                        description: "Coding contests, quiz competitions, and more"
+                    },
+                    {
+                        time: "Day 2: 9:00 AM - 11:30 AM",
+                        title: "Industry Expert Sessions",
+                        description: "Talks by professionals on current tech trends"
+                    },
+                    {
+                        time: "Day 2: 11:30 AM - 1:00 PM",
+                        title: "Technical Competitions - Finals",
+                        description: "Final rounds of all competitions"
+                    },
+                    {
+                        time: "Day 2: 1:00 PM - 2:00 PM",
+                        title: "Lunch Break",
+                        description: "Refreshments provided"
+                    },
+                    {
+                        time: "Day 2: 2:00 PM - 4:00 PM",
+                        title: "Project Exhibition",
+                        description: "Showcase of innovative student projects"
+                    },
+                    {
+                        time: "Day 2: 4:00 PM - 4:30 PM",
+                        title: "Valedictory Function & Prize Distribution",
+                        description: "Closing ceremony and awards presentation"
+                    }
+                ]
+            },
+            "event5": {
+                title: "Prajwalan 2k25",
+                category: "Hackathon",
+                image: "../images/prajwalan.jpg",
+                date: "February 17-18, 2025",
+                time: "10:00 AM - 10:00 AM (24 hours)",
+                location: "CSE Auditorium",
+                organizer: "ACE",
+                description: "National Level 24-Hour Hackathon organized By ACE. Prajwalan 2k25 is an intensive coding marathon where participants work in teams to develop innovative software solutions to real-world problems. This national-level hackathon brings together the brightest minds from colleges across the country to collaborate, code, and create. The event spans 24 continuous hours, testing not only technical skills but also endurance, teamwork, and creativity. Participants will have access to mentorship from industry professionals and academics throughout the event. Substantial cash prizes and opportunities for internships await the top-performing teams. Food, refreshments, and workspace will be provided for all registered participants.",
+                agenda: [
+                    {
+                        time: "Day 1: 10:00 AM - 11:00 AM",
+                        title: "Registration & Team Formation",
+                        description: "Check-in, team verification, and setup"
+                    },
+                    {
+                        time: "Day 1: 11:00 AM - 12:00 PM",
+                        title: "Inauguration & Problem Statement Reveal",
+                        description: "Opening ceremony and announcement of hackathon challenges"
+                    },
+                    {
+                        time: "Day 1: 12:00 PM - 6:00 PM",
+                        title: "Hacking Session I",
+                        description: "Initial development phase"
+                    },
+                    {
+                        time: "Day 1: 6:00 PM - 7:00 PM",
+                        title: "Dinner Break",
+                        description: "Refreshments provided"
+                    },
+                    {
+                        time: "Day 1: 7:00 PM - Day 2: 12:00 AM",
+                        title: "Hacking Session II",
+                        description: "Continued development with mentor support"
+                    },
+                    {
+                        time: "Day 2: 12:00 AM - 3:00 AM",
+                        title: "Midnight Evaluation",
+                        description: "Progress check and feedback from mentors"
+                    },
+                    {
+                        time: "Day 2: 3:00 AM - 8:00 AM",
+                        title: "Final Development Sprint",
+                        description: "Last coding phase to complete projects"
+                    },
+                    {
+                        time: "Day 2: 8:00 AM - 9:00 AM",
+                        title: "Breakfast & Preparation",
+                        description: "Final preparations for presentation"
+                    },
+                    {
+                        time: "Day 2: 9:00 AM - 10:00 AM",
+                        title: "Project Presentations & Judging",
+                        description: "Teams present their solutions to the panel of judges"
+                    }
+                ]
+            },
+            "event6": {
+                title: "SPURTHI'25",
+                category: "Symposium",
+                image: "../images/ace.jpg",
+                date: "February 15, 2025",
+                time: "11:00 AM - 3:00 PM",
+                location: "CSE Department",
+                organizer: "CSE Department",
+                description: "The CSE department proudly presents SPURTHI 2k25, a National-level Technical symposium. This prestigious event brings together computer science enthusiasts from across the nation for a day of intellectual exploration and friendly competition. The symposium features a variety of technical events including coding competitions, algorithm challenges, web design contests, and technical quizzes. Distinguished speakers from the tech industry and academia will share insights on emerging trends and technologies in computer science. SPURTHI'25 provides an excellent platform for students to showcase their technical skills, learn from experts, and network with peers who share their passion for computing. Attractive prizes await winners in each category.",
+                agenda: [
+                    {
+                        time: "11:00 AM - 11:30 AM",
+                        title: "Inauguration",
+                        description: "Opening ceremony with lighting of the lamp"
+                    },
+                    {
+                        time: "11:30 AM - 12:30 PM",
+                        title: "Keynote Address",
+                        description: "Guest lecture by leading industry professional"
+                    },
+                    {
+                        time: "12:30 PM - 1:30 PM",
+                        title: "Technical Quiz - Round 1",
+                        description: "Preliminary round of the technical quiz competition"
+                    },
+                    {
+                        time: "1:30 PM - 2:00 PM",
+                        title: "Lunch Break",
+                        description: "Refreshments for all participants"
+                    },
+                    {
+                        time: "2:00 PM - 2:45 PM",
+                        title: "Coding Contest",
+                        description: "Competitive programming challenges"
+                    },
+                    {
+                        time: "2:45 PM - 3:00 PM",
+                        title: "Valedictory & Prize Distribution",
+                        description: "Concluding ceremony and recognition of winners"
+                    }
+                ]
+            }
+        };
+
+        // Get modal elements
+        const modal = document.getElementById("eventModal");
+        const closeModal = document.getElementsByClassName("close-modal")[0];
+        const eventLinks = document.querySelectorAll(".event-detail-link");
+
+        // Open modal when clicking on event detail links
+        eventLinks.forEach(link => {
+            link.addEventListener("click", function(e) {
+                e.preventDefault();
+                const eventCard = this.closest(".event-card");
+                const eventId = eventCard.getAttribute("data-event-id");
+                const eventData = eventsData[eventId];
+                
+                if (eventData) {
+                    // Populate modal with event data
+                    document.getElementById("modal-event-title").textContent = eventData.title;
+                    document.getElementById("modal-event-category").textContent = eventData.category;
+                    document.getElementById("modal-event-category").className = `badge ${eventData.category.toLowerCase()}`;
+                    document.getElementById("modal-event-image").src = eventData.image;
+                    document.getElementById("modal-event-date").textContent = eventData.date;
+                    document.getElementById("modal-event-time").textContent = eventData.time;
+                    document.getElementById("modal-event-location").textContent = eventData.location;
+                    document.getElementById("modal-event-organizer").textContent = eventData.organizer;
+                    document.getElementById("modal-event-description").textContent = eventData.description;
+                    
+                    // Clear and populate agenda items
+                    const agendaContainer = document.getElementById("modal-event-agenda");
+                    agendaContainer.innerHTML = "";
+                    
+                    eventData.agenda.forEach(item => {
+                        const agendaItem = document.createElement("div");
+                        agendaItem.className = "agenda-item";
+                        
+                        agendaItem.innerHTML = `
+                            <div class="agenda-time">${item.time}</div>
+                            <div class="agenda-content">
+                                <h4>${item.title}</h4>
+                                <p>${item.description}</p>
+                            </div>
+                        `;
+                        
+                        agendaContainer.appendChild(agendaItem);
+                    });
+                    
+                    // Show modal
+                    modal.style.display = "block";
+                    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
+                }
+            });
+        });
+
+        // Close modal when clicking on X
+        closeModal.addEventListener("click", function() {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto"; // Restore scrolling
+        });
+
+        // Close modal when clicking outside of it
+        window.addEventListener("click", function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto"; // Restore scrolling
+            }
+        });
+
+        // Mobile menu toggle
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Filter functionality
+        document.getElementById('filter-button').addEventListener('click', function() {
+            // Add filter implementation here
+            alert('Filter functionality will be implemented here!');
+        });
+    </script>
+</body>
+</html>
